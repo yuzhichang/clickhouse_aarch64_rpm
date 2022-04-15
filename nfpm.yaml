@@ -1,0 +1,31 @@
+# nfpm example config file
+#
+# check https://nfpm.goreleaser.com/configuration/ for detailed usage
+#
+name: "clickhouse-common-static"
+arch: aarch64
+platform: "linux"
+version: ${VERSION}
+release: 2
+section: "default"
+priority: "extra"
+provides:
+- clickhouse
+- clickhouse-odbc-bridge
+- clickhouse-extract-from-config
+maintainer: "Zhichang Yu <yuzhichang@gmail.com>"
+description: |
+  ckman is a tool which used to manage and monitor ClickHouse database
+vendor: "clickhouse.com"
+license: "Apache"
+contents:
+  - src: programs/clickhouse
+    dst: /usr/bin/clickhouse
+  - src: programs/clickhouse-odbc-bridge
+    dst: /usr/bin/clickhouse-odbc-bridge
+  - src: /usr/bin/clickhouse
+    dst: /usr/bin/clickhouse-extract-from-config
+    type: symlink
+  - src: ./clickhouse.conf
+    dst: /etc/security/limits.d/clickhouse.conf
+    type: config
